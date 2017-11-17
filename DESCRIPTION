@@ -1,0 +1,29 @@
+Package: LCAvarsel
+Type: Package
+Title: Variable selection for latent class analysis
+Description: Variable selection for latent class analysis for model-based clustering of multivariate categorical data. 
+     The package implements a general framework for selecting the subset of variables with relevant clustering information 
+     and discard those that are redundant and/or not informative. Different algorithms are available to perform the selection:
+     stepwise, swap-stepwise and evolutionary stochastic search. The package also allows the inclusion of concomitant
+     covariates in the latent class analysis model, used to predict the class membership probabilities.
+     The selection procedure can be run in parallel on multiple cores machines.
+Version: 1.0
+Date: 2017-11-19
+Authors@R: c( person("Michael", "Fop", role = c("aut", "cre"), email = "michael.fop@ucdconnect.ie"),
+             person("Thomas Brendan", "Murphy", role = "ctb", email = "brendan.murphy@ucd.ie") )
+Author: Michael Fop [aut, cre],
+        Thomas Brendan Murphy [ctb]
+Maintainer: Michael Fop <michael.fop@ucdconnect.ie>
+URL: https://michaelfop.github.io/
+Depends: R (>= 3.4), poLCA (>= 1.4.1)
+License: GPL (>= 2)
+Imports: nnet,
+    MASS,
+    foreach,
+    parallel,
+    doParallel,
+    GA,
+    memoise
+Suggests: knitr (>= 1.12), rmarkdown (>= 1.2)
+ByteCompile: true
+LazyData: true
