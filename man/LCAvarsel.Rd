@@ -84,6 +84,7 @@ If provided, the vector/matrix of concomitant covariates given in input in \code
 %\author{Michael Fop, Thomas Brendan Murphy}
 
 \examples{
+\dontrun{
 # few simple examples
 data(carcinoma, package = "poLCA")
 sel1 <- LCAvarsel(carcinoma)                  # Fop et al. (2017) method with no swap step
@@ -92,7 +93,6 @@ sel3 <- LCAvarsel(carcinoma, search = "forward",
                   independence = TRUE)        # Dean and Raftery(2010) method
 sel4 <- LCAvarsel(carcinoma, search = "ga")   # stochastic evolutionary search
 
-\dontrun{
 # an example with a concomitant covariate 
 data(election, package = "poLCA")
 elec <- election[, cbind("MORALG", "CARESG", "KNOWG", "LEADG", "DISHONG", "INTELG",

@@ -1,19 +1,14 @@
 Package: LCAvarsel
 Type: Package
-Title: Variable selection for latent class analysis
-Description: Variable selection for latent class analysis for model-based clustering of multivariate categorical data. 
-     The package implements a general framework for selecting the subset of variables with relevant clustering information 
-     and discard those that are redundant and/or not informative. Different algorithms are available to perform the selection:
-     stepwise, swap-stepwise and evolutionary stochastic search. The package also allows the inclusion of concomitant
-     covariates in the latent class analysis model, used to predict the class membership probabilities.
-     The selection procedure can be run in parallel on multiple cores machines.
+Title: Variable Selection for Latent Class Analysis
+Description: Variable selection for latent class analysis for model-based clustering of multivariate categorical data. The package implements a general framework for selecting the subset of variables with relevant clustering information and discard those that are redundant and/or not informative. The variable selection method is based on the approach of Fop et al. (2015) <arXiv:1512.03350> and Dean and Raftery (2010) <doi:10.1007/s10463-009-0258-9>. Different algorithms are available to perform the selection: stepwise, swap-stepwise and evolutionary stochastic search. Concomitant covariates used to predict the class membership probabilities can also be included in the latent class analysis model. The selection procedure can be run in parallel on multiple cores machines.
 Version: 1.0
 Date: 2017-11-19
-Authors@R: c( person("Michael", "Fop", role = c("aut", "cre"), email = "michael.fop@ucdconnect.ie"),
+Authors@R: c( person("Michael", "Fop", role = c("aut", "cre"), email = "michael.fop@ucd.ie"),
              person("Thomas Brendan", "Murphy", role = "ctb", email = "brendan.murphy@ucd.ie") )
 Author: Michael Fop [aut, cre],
         Thomas Brendan Murphy [ctb]
-Maintainer: Michael Fop <michael.fop@ucdconnect.ie>
+Maintainer: Michael Fop <michael.fop@ucd.ie>
 URL: https://michaelfop.github.io/
 Depends: R (>= 3.4), poLCA (>= 1.4.1)
 License: GPL (>= 2)

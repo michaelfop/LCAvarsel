@@ -54,8 +54,10 @@ data(gss82, package = "poLCA")
 maxG(gss82, 1:7)      # not all latent class models can be fitted
 fit <- fitLCA(gss82, G = 1:4)
 
+\dontrun{
 # diminish tolerance and increase number of replicates
 fit2 <- fitLCA(gss82, G = 1:4, ctrlLCA = controlLCA(tol = 1e-06, nrep = 10))
+}
 
 # the example with a single covariate as in ?poLCA
 data(election, package = "poLCA")
