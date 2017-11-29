@@ -21,12 +21,12 @@ formulaLCA(variables, covariates = NULL)
 regressionStep(y, X, ctrlReg = controlReg(), independence = FALSE)
 
 selBWD(X, G, ctrlLCA = controlLCA(), ctrlReg = controlReg(),
-      independence = FALSE, swap = FALSE, start = NULL,
+      independence = FALSE, swap = FALSE, start = NULL, bicDiff = 0,
       covariates = NULL, parallel = FALSE, checkG = TRUE, 
       verbose = interactive())
        
 selFWD(X, G, ctrlLCA = controlLCA(), ctrlReg = controlReg(),
-      independence = FALSE, swap = FALSE, start = NULL,
+      independence = FALSE, swap = FALSE, start = NULL, bicDiff = 0,
       covariates = NULL, parallel = FALSE, checkG = TRUE, 
       verbose = interactive())
 

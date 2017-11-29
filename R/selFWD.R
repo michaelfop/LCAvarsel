@@ -1,5 +1,5 @@
 selFWD <- function(X, G, ctrlLCA = controlLCA(), ctrlReg = controlReg(),
-                   independence = FALSE, swap = FALSE, start = NULL,
+                   independence = FALSE, swap = FALSE, start = NULL, bicDiff = 0,
                    covariates = NULL, parallel = FALSE, checkG = TRUE,
                    verbose = interactive())
 {
@@ -57,7 +57,8 @@ selFWD <- function(X, G, ctrlLCA = controlLCA(), ctrlReg = controlReg(),
   # variable selection------------------------------------------------------
   crit <- TRUE
   toRem <- toAdd <- NULL
-  zero <- (.Machine$double.eps)^(1/3)
+  # zero <- (.Machine$double.eps)^(1/3)
+  zero <- bicDiff
   first <- TRUE
   iter <- 0
 

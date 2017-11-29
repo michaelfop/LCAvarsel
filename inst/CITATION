@@ -25,12 +25,12 @@ citEntry(entry="Article",
                              person(given=c("Thomas", "Brendan"), family="Murphy")),
          year = "2017",
          journal = "Annals of Applied Statistics.",     
-         volume = "",
-         pages = "",
+         volume = "11",
+         pages = "2085-2115",
          textVersion =
          paste("Fop, M., Smart, K. and Murphy, T. B. (2017).",
          "Variable selection for latent class analysis with application to low back pain diagnosis.",
-         "Annals of Applied Statistics. Forthcoming."))
+         "Annals of Applied Statistics. 11(4), 2085-2115."))
 
 citEntry(entry="Article",
          title = "Latent Class Analysis Variable Selection",

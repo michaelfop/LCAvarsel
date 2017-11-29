@@ -1,6 +1,7 @@
 LCAvarsel <- function(Y, G = 1:3, X = NULL,
                       search = c("backward", "forward", "ga"),
                       independence = FALSE, swap = FALSE,
+                      bicDiff = 0,
                       ctrlLCA = controlLCA(), 
                       ctrlReg = controlReg(), 
                       ctrlGA = controlGA(),
@@ -53,23 +54,23 @@ LCAvarsel <- function(Y, G = 1:3, X = NULL,
 
   if ( search == "backward" & swap ) {
     out <- selBWD(YX[,varnames], G, ctrlLCA = ctrlLCA, ctrlReg = ctrlReg, 
-                  independence = independence, swap = TRUE, covariates = X, 
+                  independence = independence, swap = TRUE, covariates = X, bicDiff = bicDiff,
                   checkG = checkG, start = start, verbose = verbose, parallel = parallel)
   } else if ( search == "forward" & swap ) {
     out <- selFWD(YX[,varnames], G, ctrlLCA = ctrlLCA, ctrlReg = ctrlReg, 
-                  independence = independence, swap = TRUE, covariates = X, 
+                  independence = independence, swap = TRUE, covariates = X, bicDiff = bicDiff,
                   checkG = checkG, start = start, verbose = verbose, parallel = parallel)
   } else if ( search == "backward" ) {
     out <- selBWD(YX[,varnames], G, ctrlLCA = ctrlLCA, ctrlReg = ctrlReg, 
-                  independence = independence, swap = FALSE, covariates = X, 
+                  independence = independence, swap = FALSE, covariates = X, bicDiff = bicDiff,
                   checkG = checkG, start = start, verbose = verbose, parallel = parallel)
   } else if ( search == "forward" ) {
     out <- selFWD(YX[,varnames], G, ctrlLCA = ctrlLCA, ctrlReg = ctrlReg, 
-                  independence = independence, swap = FALSE, covariates = X, 
+                  independence = independence, swap = FALSE, covariates = X, bicDiff = bicDiff,
                   checkG = checkG, start = start, verbose = verbose, parallel = parallel)
   } else if ( search == "ga" ) {
     out <- selGA(YX[,varnames], G, ctrlGA = ctrlGA, ctrlLCA = ctrlLCA, ctrlReg = ctrlReg,
-                 covariates = X, independence = independence, 
+                 covariates = X, independence = independence,
                  checkG = checkG, start = start, parallel = parallel)
   } else stop("search method not available")
 
