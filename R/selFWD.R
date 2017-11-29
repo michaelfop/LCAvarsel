@@ -138,7 +138,8 @@ selFWD <- function(X, G, ctrlLCA = controlLCA(), ctrlReg = controlReg(),
     if ( swap ) {
       iter <- iter + 1
       srt <- sort(bicAddDiff, decreasing = TRUE)
-      if ( length(srt) > 1 ) {
+      # if ( length(srt) > 1 ) {
+      if ( length(srt) > 1 | (length(srt) >= 1 & !added) ) {
         if ( length(noclus) != 0 ) {
           # which variable in the non-clustering set do we swap with all the ones in the clustering set?
           if ( added ) {
@@ -276,11 +277,12 @@ selFWD <- function(X, G, ctrlLCA = controlLCA(), ctrlReg = controlReg(),
     if ( swap ) {
       iter <- iter + 1
       srt <- sort(bicRem, decreasing = TRUE)
-      if ( length(srt) > 1 ) {
+      # if ( length(srt) > 1 ) {
+      if ( length(srt) > 1 | (length(srt) >= 1 & !removed) ) {
         # which variable in the clustering set do we swap with all the ones in the non-clustering set?
         if ( removed ) {
           # the variable to swap is the second with the largest evidence
-          toSwap <- names(srt[2])
+          toSwap <-  names(srt[2])
         } else {
           # or the first if none has removed
           toSwap <- names(srt[1])
@@ -308,7 +310,7 @@ selFWD <- function(X, G, ctrlLCA = controlLCA(), ctrlReg = controlReg(),
         if ( any( !is.na(bicSwapDiff) ) ) {
           # variable in 'noclus' proposed for swapping with 'toSwap'
           best <- which.max(bicSwapDiff)
-          Max <- max(bicSwapDiff)
+          Max <- max(bicSwapDiff, na.rm = TRUE)
           toSwapIn <- names(bicSwapDiff)[best]
           
           # swap

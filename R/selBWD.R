@@ -56,7 +56,7 @@ selBWD <- function(X, G, ctrlLCA = controlLCA(), ctrlReg = controlReg(),
                              .final = function(o) matrix(o, ncol = 2) ) %DO% {
                                j <- match(i, Clus)
                                set <- Clus[-j]                     # clustering set after removing variable j
-                               bicReg <- LCAvarsel:::regressionStep( y = X[,i], X = X[,set], ctrlReg = ctrlReg,
+                               bicReg <- regressionStep( y = X[,i], X = X[,set], ctrlReg = ctrlReg,
                                                          independence = independence )
                                GG <- if ( checkG ) suppressWarnings( maxG(X[,set], G) ) else G
                                modNoClus <- if ( length(GG) > 0 )
@@ -105,7 +105,7 @@ selBWD <- function(X, G, ctrlLCA = controlLCA(), ctrlReg = controlReg(),
     }
 
     # two removal steps when first iteration and starting with all variables
-    if ( first ) {
+    if ( first & is.null(start) ) {
       first <- FALSE
       next
     }
@@ -115,7 +115,8 @@ selBWD <- function(X, G, ctrlLCA = controlLCA(), ctrlReg = controlReg(),
     if ( swap ) {
       iter <- iter + 1
       srt <- sort(bicRem, decreasing = TRUE)
-      if ( length(srt) > 1 ) {
+      # if ( length(srt) > 1 ) {
+      if ( length(srt) > 1 | (length(srt) >= 1 & !removed) ) {
         # which variable in the clustering set do we swap with all the ones in the non-clustering set?
         if ( removed ) {
           # the variable to swap is the second with the largest evidence
@@ -131,9 +132,9 @@ selBWD <- function(X, G, ctrlLCA = controlLCA(), ctrlReg = controlReg(),
                                  .final = function(o) matrix(o, ncol = 3) ) %DO% {
                                    # clustering set changing 'toSwap' with one of the non-clustering set
                                    set <- c( clus[-indSwap], i )
-                                   bicReg <- LCAvarsel:::regressionStep( y = X[,i], X = X[,clus], ctrlReg = ctrlReg,
+                                   bicReg <- regressionStep( y = X[,i], X = X[,clus], ctrlReg = ctrlReg,
                                                              independence = independence )
-                                   bicRegSwap <- LCAvarsel:::regressionStep( y = X[,toSwap], X = X[,set], ctrlReg = ctrlReg )
+                                   bicRegSwap <- regressionStep( y = X[,toSwap], X = X[,set], ctrlReg = ctrlReg )
                                    GG <- if ( checkG ) suppressWarnings( maxG(X[,set], G) ) else G
                                    modNoClus <- if ( length(GG) > 0 )
                                      fitLCA( X[,set], G = GG, X = covariates, ctrlLCA = ctrlLCA )$bic else NA
@@ -158,7 +159,7 @@ selBWD <- function(X, G, ctrlLCA = controlLCA(), ctrlReg = controlReg(),
           if ( Max > zero ) {
             info[iter+1,5] <- "Accepted"
             swapped <- TRUE
-            Max <- max(bicSwapDiff)
+            Max <- max(bicSwapDiff, na.rm = TRUE)
             bicClusMod <- out[best,3]
             j <- match(toSwap, clus)
             clus <- c( clus[-j], toSwapIn )
@@ -199,7 +200,7 @@ selBWD <- function(X, G, ctrlLCA = controlLCA(), ctrlReg = controlReg(),
       out <- foreach::foreach( i = Noclus, .combine = "rbind", .errorhandling = "remove",
                                .final = function(o) matrix(o, ncol = 2) ) %DO% {
                                  set <- c(clus, i)               # clustering set after adding variable j
-                                 bicReg <- LCAvarsel:::regressionStep( y = X[,i], X = X[,clus], ctrlReg = ctrlReg,
+                                 bicReg <- regressionStep( y = X[,i], X = X[,clus], ctrlReg = ctrlReg,
                                                            independence = independence )
                                  GG <- if ( checkG ) suppressWarnings( maxG(X[,set], G) ) else G
                                  modClus <- if ( length(GG) > 0 )
@@ -257,7 +258,8 @@ selBWD <- function(X, G, ctrlLCA = controlLCA(), ctrlReg = controlReg(),
     if ( swap ) {
       iter <- iter + 1
       srt <- sort(bicAddDiff, decreasing = TRUE)
-      if ( length(srt) > 1 ) {
+      # if ( length(srt) > 1 ) {
+      if ( length(srt) > 1 | (length(srt) >= 1 & !added) ) {
         if ( length(noclus) != 0 ) {
           # which variable in the non-clustering set do we swap with all the ones in the clustering set?
           if ( added ) {
